@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { faker } from '@faker-js/faker';
 import { TodoItem } from './TodoItem';
 import { nanoid } from 'nanoid';
+import { ReactElement } from 'react';
 
+// interface elements types
 interface My_items{
   label: string;
   status: string;
@@ -38,10 +40,10 @@ const initialList = [
   ...generateNTodo(10),
 ];
 
-function App() :{TO_BE_DEFINED}{
+function App() : ReactElement {
   const [todoList, setTodoList] = useState(initialList);
 
-  const updater = (id:string, newStatus:string) => {
+  const updater = (id:string, newStatus:string) : void => {
     setTodoList((oldList) =>
       oldList.map((it) => {
         if (it.id !== id) {
@@ -63,7 +65,7 @@ function App() :{TO_BE_DEFINED}{
             key={item.id}
             label={item.label}
             status={item.status}
-            onChecked={(newState: string) => updater(item.id, newState)}
+            onChecked={(newState: string): void => updater(item.id, newState)}
           />
         ))}
       </div>
