@@ -3,13 +3,19 @@ import { faker } from '@faker-js/faker';
 import { TodoItem } from './TodoItem';
 import { nanoid } from 'nanoid';
 
-const generateFakeTodoItem = () => ({
+interface My_items{
+  label: string;
+  status: string;
+  id: string;
+}
+
+const generateFakeTodoItem = (): My_items => ({
   label: faker.hacker.phrase(),
   status: faker.random.arrayElement(['open', 'done', 'archived']),
   id: nanoid(),
 });
 
-const generateNTodo = (size) => {
+const generateNTodo = (size:number): My_items[] => {
   return Array.from(Array(size).keys()).map(generateFakeTodoItem);
 };
 
@@ -32,10 +38,10 @@ const initialList = [
   ...generateNTodo(10),
 ];
 
-function App() {
+function App() :{TO_BE_DEFINED}{
   const [todoList, setTodoList] = useState(initialList);
 
-  const updater = (id, newStatus) => {
+  const updater = (id:string, newStatus:string) => {
     setTodoList((oldList) =>
       oldList.map((it) => {
         if (it.id !== id) {
@@ -57,7 +63,7 @@ function App() {
             key={item.id}
             label={item.label}
             status={item.status}
-            onChecked={(newState) => updater(item.id, newState)}
+            onChecked={(newState: string) => updater(item.id, newState)}
           />
         ))}
       </div>
